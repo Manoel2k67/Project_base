@@ -46,7 +46,7 @@ const Sidebar = ({ isMobile, isOpen, toggleSidebar }) => {
       <header className="sidebar-header">
         <img src={Logo} alt="CodingManoel" className="header-logo" />
         <button className="sidebar-toggle" onClick={handleSidebarToggle}>
-          <span className="material-symbols-rounded">chevron_left</span>
+          <span className="material-symbols-rounded toggle-icon">chevron_left</span>
         </button>
       </header>
       <div className="sidebar-content">
