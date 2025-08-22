@@ -30,6 +30,11 @@ const App = () => {
   const toggleMobileSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+  
+  const mainContentStyle = {
+    marginLeft: isSidebarOpen ? '270px' : '90px', 
+    transition: 'margin-left 0.4s ease'
+  };
 
   return (
     <Router>
@@ -42,7 +47,7 @@ const App = () => {
       )}
       <div className="app-container">
         <Sidebar isMobile={isMobile} isOpen={isSidebarOpen} toggleSidebar={toggleMobileSidebar} />
-        <main className="main-content">
+        <main className="main-content" style={mainContentStyle}>
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/analytics" element={<Analytics />} />
