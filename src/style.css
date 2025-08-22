@@ -1,0 +1,28 @@
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+}
+
+/* Base styles for pages content */
+.page-content {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 3px 9px var(--color-shadow);
+}
+
+.page-content h1 {
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+.page-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
