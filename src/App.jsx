@@ -11,42 +11,44 @@ import Settings from './pages/Settings';
 
 const App = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(!isMobile);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       const mobileView = window.innerWidth <= 768;
       setIsMobile(mobileView);
       if (!mobileView) {
-        setIsSidebarOpen(true);
-      } else {
-        setIsSidebarOpen(false);
+        setIsSidebarCollapsed(false); // Sidebar não colapsada por padrão no desktop
       }
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const toggleMobileSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+  const toggleSidebar = () => {
+    setIsSidebarCollapsed(!isSidebarCollapsed);
   };
   
   const mainContentStyle = {
-    marginLeft: isSidebarOpen ? '270px' : '90px', 
+    marginLeft: isSidebarCollapsed ? '90px' : '270px', 
     transition: 'margin-left 0.4s ease'
   };
 
   return (
     <Router>
-      {isMobile && !isSidebarOpen && (
+      {isMobile && !isSidebarCollapsed && (
         <nav className="site-nav">
-          <button className="sidebar-toggle" onClick={toggleMobileSidebar}>
+          <button className="sidebar-toggle" onClick={toggleSidebar}>
             <span className="material-symbols-rounded">chevron_right</span>
           </button>
         </nav>
       )}
       <div className="app-container">
-        <Sidebar isMobile={isMobile} isOpen={isSidebarOpen} toggleSidebar={toggleMobileSidebar} />
+        <Sidebar 
+          isMobile={isMobile} 
+          isCollapsed={isSidebarCollapsed} 
+          toggleSidebar={toggleSidebar} 
+        />
         <main className="main-content" style={mainContentStyle}>
           <Routes>
             <Route path="/" element={<Dashboard />} />

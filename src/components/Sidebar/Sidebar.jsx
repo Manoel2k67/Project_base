@@ -13,8 +13,7 @@ const menuItems = [
   { path: '/settings', label: 'Settings', icon: 'settings' },
 ];
 
-const Sidebar = ({ isMobile, isOpen, toggleSidebar }) => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+const Sidebar = ({ isMobile, isCollapsed, toggleSidebar }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const location = useLocation();
 
@@ -31,28 +30,18 @@ const Sidebar = ({ isMobile, isOpen, toggleSidebar }) => {
     localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
   }, [isDarkTheme]);
 
-  const handleSidebarToggle = () => {
-    if (isMobile) {
-      toggleSidebar();
-    } else {
-      setIsCollapsed(!isCollapsed);
-    }
-  };
-
-  const sidebarClass = isMobile ? (isOpen ? '' : 'collapsed') : (isCollapsed ? 'collapsed' : '');
+  const sidebarClass = isCollapsed ? 'collapsed' : '';
 
   return (
     <aside className={`sidebar ${sidebarClass}`}>
       <header className="sidebar-header">
         <img src={Logo} alt="CodingManoel" className="header-logo" />
-        {(!isMobile || (isMobile && isOpen)) && (
-          <button className="sidebar-toggle" onClick={handleSidebarToggle}>
-            <span className="material-symbols-rounded toggle-icon">chevron_left</span>
-          </button>
-        )}
+        <button className="sidebar-toggle" onClick={toggleSidebar}>
+          <span className="material-symbols-rounded toggle-icon">chevron_left</span>
+        </button>
       </header>
       <div className="sidebar-content">
-        <form className="search-form" onClick={() => setIsCollapsed(false)}>
+        <form className="search-form" onClick={() => isCollapsed && toggleSidebar()}>
           <span className="material-symbols-rounded">search</span>
           <input type="search" placeholder="Search..." required />
         </form>
@@ -62,6 +51,7 @@ const Sidebar = ({ isMobile, isOpen, toggleSidebar }) => {
               <Link
                 to={item.path}
                 className={`menu-link ${location.pathname === item.path ? 'active' : ''}`}
+                onClick={() => isMobile && toggleSidebar()} // Close sidebar on mobile after clicking a link
               >
                 <span className="material-symbols-rounded">{item.icon}</span>
                 <span className="menu-label">{item.label}</span>
@@ -85,6 +75,6 @@ const Sidebar = ({ isMobile, isOpen, toggleSidebar }) => {
       </div>
     </aside>
   );
-}; 
+};
 
 export default Sidebar;
