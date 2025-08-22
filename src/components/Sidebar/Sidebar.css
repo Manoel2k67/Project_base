@@ -27,7 +27,7 @@
     border-bottom: 1px solid var(--color-border-hr);
     position: relative;
     /* Apenas para garantir um espaçamento uniforme entre os elementos */
-    gap: 12px; 
+    gap: 12px;
 }
 
 .sidebar-header .header-logo {
@@ -275,10 +275,10 @@ body.dark-theme .theme-toggle-track .theme-toggle-indicator {
         width: 270px;
     }
 
-    /* Oculte o botão de alternância do desktop em modo mobile */
-    .sidebar-header .sidebar-toggle {
+    /* Remova ou comente a regra abaixo */
+    /* .sidebar-header .sidebar-toggle {
       display: none;
-    }
+    } */
     
     .sidebar.collapsed .sidebar-header .sidebar-toggle {
         right: -12px;
