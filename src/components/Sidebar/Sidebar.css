@@ -293,9 +293,7 @@ body.dark-theme .theme-toggle-track .theme-toggle-indicator {
     }
     
     .sidebar.collapsed .sidebar-header .sidebar-toggle {
-        right: -12px;
-        height: 34px;
-        width: 34px;
+        display: none; /* Esta linha foi adicionada para ocultar o botão */
     }
 
     .site-nav {
