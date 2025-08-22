@@ -48,7 +48,7 @@ const Sidebar = () => {
         </button>
       </header>
       <div className="sidebar-content">
-        <form className="search-form">
+        <form className="search-form" onClick={() => setIsCollapsed(false)}>
           <span className="material-symbols-rounded">search</span>
           <input type="search" placeholder="Search..." required />
         </form>
