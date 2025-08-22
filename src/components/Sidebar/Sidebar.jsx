@@ -13,7 +13,7 @@ const menuItems = [
   { path: '/settings', label: 'Settings', icon: 'settings' },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ isMobile, isOpen, toggleSidebar }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const location = useLocation();
@@ -31,19 +31,21 @@ const Sidebar = () => {
     localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
   }, [isDarkTheme]);
 
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
+  const handleSidebarToggle = () => {
+    if (isMobile) {
+      toggleSidebar();
+    } else {
+      setIsCollapsed(!isCollapsed);
+    }
   };
 
-  const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
-  };
+  const sidebarClass = isMobile ? (isOpen ? '' : 'collapsed') : (isCollapsed ? 'collapsed' : '');
 
   return (
-    <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+    <aside className={`sidebar ${sidebarClass}`}>
       <header className="sidebar-header">
         <img src={Logo} alt="CodingManoel" className="header-logo" />
-        <button className="sidebar-toggle" onClick={toggleSidebar}>
+        <button className="sidebar-toggle" onClick={handleSidebarToggle}>
           <span className="material-symbols-rounded">chevron_left</span>
         </button>
       </header>
@@ -67,7 +69,7 @@ const Sidebar = () => {
         </ul>
       </div>
       <div className="sidebar-footer">
-        <button className="theme-toggle" onClick={toggleTheme}>
+        <button className="theme-toggle" onClick={() => setIsDarkTheme(!isDarkTheme)}>
           <div className="theme-label">
             <span className="theme-icon material-symbols-rounded">
               {isDarkTheme ? 'light_mode' : 'dark_mode'}
@@ -81,6 +83,6 @@ const Sidebar = () => {
       </div>
     </aside>
   );
-};
+}; 
 
 export default Sidebar;
