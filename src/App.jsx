@@ -11,7 +11,7 @@ import Settings from './pages/Settings';
 
 const App = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(isMobile);
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,13 +30,13 @@ const App = () => {
   };
   
   const mainContentStyle = {
-    marginLeft: isSidebarCollapsed ? '90px' : '270px', 
+    marginLeft: isMobile ? '0' : (isSidebarCollapsed ? '90px' : '270px'), 
     transition: 'margin-left 0.4s ease'
   };
 
   return (
     <Router>
-      {isMobile && !isSidebarCollapsed && (
+      {isMobile && isSidebarCollapsed && (
         <nav className="site-nav">
           <button className="sidebar-toggle" onClick={toggleSidebar}>
             <span className="material-symbols-rounded">chevron_right</span>
