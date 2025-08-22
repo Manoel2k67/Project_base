@@ -72,6 +72,12 @@ const Dashboard = () => {
     { month: 'Jun', receita: 13200, despesas: 5300 },
   ];
 
+  const recentLeads = [
+    { name: 'Maria Silva', email: 'maria@empresa.com', company: 'Tech Solutions', status: 'qualified' },
+    { name: 'João Santos', email: 'joao@empresa.com', company: 'InovaTech', status: 'in-progress' },
+    { name: 'Ana Costa', email: 'ana@outraempresa.com', company: 'DataSystems', status: 'new' },
+  ];
+
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
   return (
@@ -120,7 +126,7 @@ const Dashboard = () => {
           background-color: var(--color-bg-primary);
           color: var(--color-text-primary);
           transition: background-color 0.3s ease, color 0.3s ease;
-          min-width: 0; /* Essencial para evitar o transbordamento */
+          min-width: 0;
         }
 
         .header-container {
@@ -269,6 +275,60 @@ const Dashboard = () => {
           background-color: var(--color-primary-light);
           color: var(--color-primary);
         }
+        
+        /* MOBILE RESPONSIVENESS FIXES */
+        @media (max-width: 768px) {
+            .page-content {
+                padding: 15px;
+            }
+            .kpi-grid {
+                grid-template-columns: 1fr; /* Stacks cards vertically */
+            }
+            .chart-card {
+                padding: 15px;
+            }
+            .table-card {
+                padding: 15px;
+            }
+        
+            /* Table responsiveness fix */
+            .table-responsive {
+                overflow-x: hidden; /* Prevent horizontal scroll */
+            }
+            .table-card table {
+                border: 0;
+            }
+            .table-card table thead {
+                display: none;
+            }
+            .table-card table, .table-card tbody, .table-card tr, .table-card td {
+                display: block;
+                width: 100%;
+            }
+            .table-card tr {
+                border-bottom: 2px solid var(--color-border-hr);
+                margin-bottom: 10px;
+                display: flex;
+                flex-direction: column;
+            }
+            .table-card td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+                border-bottom: 1px dashed var(--color-border-hr);
+                white-space: normal;
+            }
+            .table-card td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 12px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+            }
+        }
       `}</style>
 
       <div className="page-content">
@@ -358,24 +418,18 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Maria Silva</td>
-                  <td>maria@empresa.com</td>
-                  <td>Tech Solutions</td>
-                  <td><span className="status-badge qualified">Qualificado</span></td>
-                </tr>
-                <tr>
-                  <td>João Santos</td>
-                  <td>joao@empresa.com</td>
-                  <td>InovaTech</td>
-                  <td><span className="status-badge in-progress">Em andamento</span></td>
-                </tr>
-                <tr>
-                  <td>Ana Costa</td>
-                  <td>ana@outraempresa.com</td>
-                  <td>DataSystems</td>
-                  <td><span className="status-badge new">Novo</span></td>
-                </tr>
+                {recentLeads.map((lead, index) => (
+                  <tr key={index}>
+                    <td data-label="Nome">{lead.name}</td>
+                    <td data-label="Email">{lead.email}</td>
+                    <td data-label="Empresa">{lead.company}</td>
+                    <td data-label="Status">
+                      <span className={`status-badge ${lead.status}`}>
+                        {lead.status === 'qualified' ? 'Qualificado' : lead.status === 'in-progress' ? 'Em andamento' : 'Novo'}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
