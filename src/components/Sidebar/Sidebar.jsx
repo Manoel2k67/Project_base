@@ -45,9 +45,11 @@ const Sidebar = ({ isMobile, isOpen, toggleSidebar }) => {
     <aside className={`sidebar ${sidebarClass}`}>
       <header className="sidebar-header">
         <img src={Logo} alt="CodingManoel" className="header-logo" />
-        <button className="sidebar-toggle" onClick={handleSidebarToggle}>
-          <span className="material-symbols-rounded toggle-icon">chevron_left</span>
-        </button>
+        {(!isMobile || (isMobile && isOpen)) && (
+          <button className="sidebar-toggle" onClick={handleSidebarToggle}>
+            <span className="material-symbols-rounded toggle-icon">chevron_left</span>
+          </button>
+        )}
       </header>
       <div className="sidebar-content">
         <form className="search-form" onClick={() => setIsCollapsed(false)}>

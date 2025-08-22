@@ -33,7 +33,7 @@ const App = () => {
 
   return (
     <Router>
-      {isMobile && (
+      {isMobile && !isSidebarOpen && (
         <nav className="site-nav">
           <button className="sidebar-toggle" onClick={toggleMobileSidebar}>
             <span className="material-symbols-rounded">chevron_right</span>
