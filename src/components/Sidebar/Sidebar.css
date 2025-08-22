@@ -26,7 +26,6 @@
     justify-content: space-between;
     border-bottom: 1px solid var(--color-border-hr);
     position: relative;
-    /* Apenas para garantir um espaçamento uniforme entre os elementos */
     gap: 12px;
 }
 
@@ -55,17 +54,16 @@
     justify-content: center;
     color: var(--color-text-primary);
     background: var(--color-bg-secondary);
-    transition: 0.4s ease, right 0.4s ease; /* Adicione a transição para a propriedade `right` */
+    transition: 0.4s ease, right 0.4s ease;
     
-    /* Novo posicionamento */
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 18px; /* Posição inicial do botão na barra expandida */
+    right: 18px;
 }
 
 .sidebar.collapsed .sidebar-header .sidebar-toggle {
-    right: 25px; /* Posição do botão quando a barra está recolhida */
+    right: 25px;
     height: 36px;
     width: 36px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
@@ -84,9 +82,6 @@
 .sidebar.collapsed .sidebar-toggle span {
     transform: rotate(180deg);
     transition: none;
-}
-.sidebar.collapsed .sidebar-toggle span {
-    transform: rotate(180deg);
 }
 
 .sidebar .sidebar-content {
@@ -161,6 +156,14 @@
     border-radius: 8px;
     color: var(--color-text-primary);
     transition: 0.3s ease;
+    /* Previne o piscar em azul em dispositivos móveis */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .menu-link .menu-label {
@@ -175,6 +178,19 @@
 .menu-list .menu-link:is(:hover, .active) {
     color: #fff;
     background: var(--color-hover-primary);
+    /* Transição suave para a mudança de cor */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Remove estilos de foco padrão que causam o efeito de piscar */
+.menu-list .menu-link:focus {
+    outline: none;
+}
+
+/* Garante que o estado ativo seja aplicado imediatamente */
+.menu-list .menu-link:active {
+    background: var(--color-hover-primary) !important;
+    color: #fff !important;
 }
 
 .sidebar .sidebar-footer {
@@ -271,14 +287,9 @@ body.dark-theme .theme-toggle-track .theme-toggle-indicator {
     }
 
     .sidebar.collapsed {
-        left: -270px; /* Altere para -270px para esconder a sidebar completamente */
+        left: -270px;
         width: 270px;
     }
-
-    /* Remova ou comente a regra abaixo */
-    /* .sidebar-header .sidebar-toggle {
-      display: none;
-    } */
     
     .sidebar.collapsed .sidebar-header .sidebar-toggle {
         right: -12px;
@@ -287,6 +298,6 @@ body.dark-theme .theme-toggle-track .theme-toggle-indicator {
     }
 
     .site-nav {
-      display: block;
+        display: block;
     }
 }
