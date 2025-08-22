@@ -26,6 +26,8 @@
     justify-content: space-between;
     border-bottom: 1px solid var(--color-border-hr);
     position: relative;
+    /* Apenas para garantir um espaçamento uniforme entre os elementos */
+    gap: 12px; 
 }
 
 .sidebar-header .header-logo {
@@ -53,16 +55,19 @@
     justify-content: center;
     color: var(--color-text-primary);
     background: var(--color-bg-secondary);
-    transition: 0.4s ease;
+    transition: 0.4s ease, right 0.4s ease; /* Adicione a transição para a propriedade `right` */
+    
+    /* Novo posicionamento */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 18px; /* Posição inicial do botão na barra expandida */
 }
 
 .sidebar.collapsed .sidebar-header .sidebar-toggle {
-    position: absolute;
-    right: 25px; /* Ajustado para ficar mais próximo da borda */
-    top: 50%;
-    transform: translateY(-50%);
-    height: 36px; /* Reduzido ligeiramente */
-    width: 36px;  /* Reduzido ligeiramente */
+    right: 25px; /* Posição do botão quando a barra está recolhida */
+    height: 36px;
+    width: 36px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     z-index: 10;
 }
@@ -72,10 +77,14 @@
 }
 
 .sidebar-header .sidebar-toggle span {
-    font-size: 1.6rem; /* Reduzido ligeiramente */
-    transition: transform 0.4s ease;
+    font-size: 1.6rem;
+    transition: none;
 }
 
+.sidebar.collapsed .sidebar-toggle span {
+    transform: rotate(180deg);
+    transition: none;
+}
 .sidebar.collapsed .sidebar-toggle span {
     transform: rotate(180deg);
 }
